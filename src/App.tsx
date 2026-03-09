@@ -1,4 +1,10 @@
 import { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BookingProvider } from './context/BookingContext';
+import BookingModal from './components/BookingModal';
+import HomePage from './pages/HomePage';
+import HablemosPage from './pages/HablemosPage';
+import { Sun, Moon } from 'lucide-react';
 import './styles/index.css';
 
 function App() {
@@ -13,34 +19,85 @@ function App() {
     }, [theme]);
 
     return (
-        <div className="app">
-            <header style={{ padding: '2rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <h1>Samuel Auré</h1>
-                <button
-                    onClick={toggleTheme}
-                    style={{
-                        padding: '0.5rem 1rem',
-                        cursor: 'pointer',
-                        fontFamily: 'Oswald',
-                        background: 'var(--text-primary)',
-                        color: 'var(--bg-color)',
-                        border: 'none',
-                        borderRadius: '4px'
-                    }}
-                >
-                    {theme === 'light' ? 'MODO NOCHE (TECH)' : 'MODO DÍA (LIFE)'}
-                </button>
-            </header>
+        <Router>
+            <BookingProvider>
+                <div className="app">
+                    <header className="main-header">
+                        <div className="header-content">
+                            <h1 className="logo">Samuel Aure</h1>
+                            <button
+                                className="theme-toggle"
+                                onClick={toggleTheme}
+                                title={theme === 'light' ? 'Modo Noche' : 'Modo Día'}
+                            >
+                                {theme === 'light' ? <Moon size={20} /> : <Sun size={20} />}
+                                <span>{theme === 'light' ? 'TECH' : 'LIFE'}</span>
+                            </button>
+                        </div>
+                    </header>
 
-            <main style={{ padding: '2rem', maxWidth: '800px', margin: '0 auto' }}>
-                <section>
-                    <h2>El Fundador Multidimensional</h2>
-                    <p style={{ marginTop: '1rem', lineHeight: '1.6' }}>
-                        Explorando la intersección entre la libertad personal, los sistemas digitales y las sociedades estratégicas.
-                    </p>
-                </section>
-            </main>
-        </div>
+                    <Routes>
+                        <Route path="/" element={<HomePage />} />
+                        <Route path="/hablemos" element={<HablemosPage />} />
+                    </Routes>
+
+                    <BookingModal />
+                </div>
+
+                <style>{`
+          .main-header {
+            padding: 2rem;
+            position: sticky;
+            top: 0;
+            background: var(--bg-color);
+            z-index: 100;
+            transition: var(--transition-smooth);
+            border-bottom: 1px solid rgba(128, 128, 128, 0.1);
+          }
+
+          .header-content {
+            max-width: var(--max-width-content);
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+          }
+
+          .logo {
+            font-size: 1.25rem;
+            letter-spacing: 0.1em;
+            font-weight: 700;
+          }
+
+          .theme-toggle {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.6rem 1.2rem;
+            background: var(--text-primary);
+            color: var(--bg-color);
+            border: none;
+            cursor: pointer;
+            font-family: 'Oswald', sans-serif;
+            font-size: 0.75rem;
+            letter-spacing: 0.15em;
+            font-weight: 600;
+            transition: var(--transition-fast);
+            border-radius: 4px;
+          }
+
+          .theme-toggle:hover {
+            transform: scale(1.05);
+            opacity: 0.9;
+          }
+
+          @media (max-width: 768px) {
+            .main-header { padding: 1.5rem; }
+            .theme-toggle span { display: none; }
+          }
+        `}</style>
+            </BookingProvider>
+        </Router>
     );
 }
 
