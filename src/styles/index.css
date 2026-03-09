@@ -1,0 +1,44 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Oswald:wght@500;600;700&display=swap');
+
+:root {
+  /* Day Mode (Philosophy/Life) */
+  --day-bg: #f8f4e8;
+  --day-text-primary: #222222;
+  --day-text-secondary: #333333;
+
+  /* Night Mode (Tech/Systems) */
+  --night-bg: #313131;
+  --night-text-primary: #cbc7bc;
+  --night-text-secondary: #c3c0b9;
+
+  /* Current Theme Defaults (Start with Day) */
+  --bg-color: var(--day-bg);
+  --text-primary: var(--day-text-primary);
+  --text-secondary: var(--day-text-secondary);
+  
+  --transition-smooth: all 0.3s ease;
+}
+
+[data-theme='dark'] {
+  --bg-color: var(--night-bg);
+  --text-primary: var(--night-text-primary);
+  --text-secondary: var(--night-text-secondary);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-primary);
+  transition: var(--transition-smooth);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Oswald', sans-serif;
+  text-transform: uppercase;
+}
