@@ -1,7 +1,7 @@
 {
   "name": "samuelaure-web",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.1.0",
   "type": "module",
   "author": {
     "name": "Samuel Aure",
@@ -19,7 +19,7 @@
     "format": "prettier --write \"src/**/*.{ts,tsx,css,md}\"",
     "test": "echo \"Error: no test specified\" && exit 0",
     "verify": "npm run lint && npm run build",
-    "release": "echo \"Release protocol not yet defined\" && exit 0"
+    "release": "echo \"Ready for release assignment\" && exit 0"
   },
   "dependencies": {
     "react": "^18.2.0",
