@@ -4,6 +4,7 @@ import { BookingProvider } from './context/BookingContext';
 import BookingModal from './components/BookingModal';
 import HomePage from './pages/HomePage';
 import HablemosPage from './pages/HablemosPage';
+import { Navigate, Link } from 'react-router-dom';
 import { Sun, Moon } from 'lucide-react';
 import './styles/index.css';
 
@@ -24,7 +25,9 @@ function App() {
                 <div className="app">
                     <header className="main-header">
                         <div className="header-content">
-                            <h1 className="logo">Samuel Aure</h1>
+                            <Link to="/" className="logo-link">
+                                <h1 className="logo">Samuel Aure</h1>
+                            </Link>
                             <button
                                 className="theme-toggle"
                                 onClick={toggleTheme}
@@ -33,12 +36,16 @@ function App() {
                                 {theme === 'light' ? <Moon size={20} /> : <Sun size={20} />}
                                 <span>{theme === 'light' ? 'TECH' : 'LIFE'}</span>
                             </button>
+                            <Link to="/hablemos" className="header-cta">
+                                Conversemos
+                            </Link>
                         </div>
                     </header>
 
                     <Routes>
                         <Route path="/" element={<HomePage />} />
                         <Route path="/hablemos" element={<HablemosPage />} />
+                        <Route path="*" element={<Navigate to="/" replace />} />
                     </Routes>
 
                     <BookingModal />
@@ -94,6 +101,31 @@ function App() {
           @media (max-width: 768px) {
             .main-header { padding: 1.5rem; }
             .theme-toggle span { display: none; }
+          }
+
+          .logo-link {
+            text-decoration: none;
+            color: inherit;
+          }
+
+          .header-cta {
+            margin-left: 1.5rem;
+            text-decoration: none;
+            color: var(--text-primary);
+            font-family: 'Oswald', sans-serif;
+            font-weight: 600;
+            font-size: 0.85rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            padding: 0.6rem 1.2rem;
+            border: 1px solid var(--text-primary);
+            border-radius: 4px;
+            transition: var(--transition-fast);
+          }
+
+          .header-cta:hover {
+            background: var(--text-primary);
+            color: var(--bg-color);
           }
         `}</style>
             </BookingProvider>

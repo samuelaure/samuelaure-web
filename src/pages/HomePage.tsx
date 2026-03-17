@@ -1,5 +1,5 @@
 import { CONTENT } from '../constants/content';
-import { useBooking } from '../context/BookingContext';
+import { useBooking } from '../hooks/useBooking';
 
 const HomePage = () => {
   const { openBooking } = useBooking();
